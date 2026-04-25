@@ -1,0 +1,11 @@
+:8080 {
+    @authorized header Authorization "Bearer {env.FIRECRAWL_API_KEY}"
+
+    handle @authorized {
+        reverse_proxy api:3002
+    }
+
+    handle {
+        respond "Unauthorized" 401
+    }
+}
